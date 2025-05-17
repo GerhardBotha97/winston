@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  winston:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: winston
+    volumes:
+      # Mount external contract and output directories
+      - ${CONTRACT_DIR:-./contracts}:/app/contracts
+      - ${OUTPUT_DIR:-./output}:/app/output
+      # Mount external .env file
+      - ${ENV_FILE:-./.env}:/app/.env
+      # Mount temp directory for git repositories
+      - ./temp_repos:/app/temp_repos
+    # Use the mounted .env file
+    env_file:
+      - .env
+    # Default command - can be overridden with INPUT parameter
+    command: audit ${INPUT:-/app/contracts/SimpleToken.sol}
+    # Alternatively, uncomment the following line to use the API key directly
+    # environment:
+    #   - ANTHROPIC_API_KEY=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 
