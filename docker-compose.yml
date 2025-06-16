@@ -19,6 +19,6 @@ services:
       - .env
     # Default command - can be overridden with INPUT parameter
     command: audit ${INPUT:-/app/contracts/SimpleToken.sol}
-    # Alternatively, uncomment the following line to use the API key directly
+    # Alternatively, uncomment the following line to use the API key directly (DEMO KEY)
     # environment:
     #   - ANTHROPIC_API_KEY=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 
